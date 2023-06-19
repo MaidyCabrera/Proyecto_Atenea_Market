@@ -1,6 +1,7 @@
+
 /**
  * Lógica de negocio para el microservicio carrito de Compras
- * @author Maidy Cabrera<maidyc914@gmail.com>
+ * @author Paulo César Coronado <paulocoronado at udistrital.edu.co>
  */
 
 
@@ -11,12 +12,23 @@ const prisma= new PrismaClient()
 
 export const getProductInventory =async (req:Request, res:Response)=>{
 
-    //TO DO: Utilizar el valor que envía el usuario
+    //const idProduct= req.params.idProduct
+    const {idProduct}= req.params
+    let myProduct= parseInt(idProduct)
+
+    //Verificar que idProduct sea un número
+
+    if(isNaN(myProduct)){
+        res.status(400)
+        res.json({error: 'Bad Request'})
+        return
+    }
+   
     try{
         const productInventory= await prisma.product.findUnique(
             {
                 where:{
-                    idProduct:1
+                    idProduct:myProduct
                 }
             }
         )
@@ -26,6 +38,6 @@ export const getProductInventory =async (req:Request, res:Response)=>{
         res.status(503)
         res.json({error:'Service Unavailable'})
     }
-
+    
 }
 

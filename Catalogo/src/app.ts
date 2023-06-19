@@ -1,5 +1,5 @@
 /**
- * Archivo principal del microservicio de Cstálogo
+ * Archivo principal del microservicio de Catálogo
  * @author Maidy Cabrera <maidyc914@gmail.com>
  */
 
